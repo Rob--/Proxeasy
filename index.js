@@ -34,7 +34,6 @@ app.get("/*", function(req, res){
 
   var req_cb = function(proxy_res){
     proxy_res.on('data', function(chunk){
-      console.log(chunk.toString('utf-8'))
       res.write(chunk, 'binary')
     })
 
