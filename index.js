@@ -22,10 +22,10 @@ app.get("/*", function(req, res){
   var path = url.path
   var port = path.indexOf('https') == -1 ? 80 : 443
 
-  console.log(ip, 'requested (' + port + ')', host + path, '\n', path)
+  console.log(ip + ' requested (' + port + '):\n > host: ' + host + '\n > path: ' + path + '\n > url obj:', url, '\n---')
 
   var config = {
-    hostname: host || req.headers.referer ? URL.parse(req.headers.referer).host : '',
+    hostname: host,
     port: port,
     path: path,
     method: 'GET'
@@ -46,15 +46,7 @@ app.get("/*", function(req, res){
   proxy.on('error', function(error) {
     console.log('an error occured', error)
   });
-
-  // res.on('data', function(chunk){
-  //   proxy.write(chunk, 'binary');
-  // })
-
-  // res.on('end', function(){
-  //   proxy.end()
-  // })
-
+  
   proxy.end();
 })
 
