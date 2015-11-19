@@ -18,12 +18,12 @@ app.get('/', function(req, res){
 app.get("/*", function(req, res){
   var ip = req.header('x-forwarded-for') || req.ip
   var url = URL.parse(req.url.substr(1))
-  var host = url.host;
-  var path = url.path;
-  var port = path.indexOf('https') == -1 ? 80 : 443;
-  var method = req.headers.method;
+  var host = url.host
+  var path = url.path
+  var port = path.indexOf('https') == -1 ? 80 : 443
+  var method = req.headers.method
 
-  console.log(url, host, path)
+  console.log(ip, method, '(' + port + ')', host + path, '\n', path)
 
   var config = {
     hostname: host,
@@ -43,6 +43,10 @@ app.get("/*", function(req, res){
   }
 
   var proxy = config.port == 443 ? https.request(config, req_cb) : http.request(config, req_cb);
+
+  proxy.on('error', function(error) {
+    console.log('an error occured', error)
+  });
 
   // res.on('data', function(chunk){
   //   proxy.write(chunk, 'binary');
