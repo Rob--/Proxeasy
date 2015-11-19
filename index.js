@@ -25,7 +25,7 @@ app.get("/*", function(req, res){
   console.log(ip, 'requested (' + port + ')', host + path, '\n', path)
 
   var config = {
-    hostname: host,
+    hostname: host || req.headers.referer ? URL.parse(req.headers.referer).host : '',
     port: port,
     path: path,
     method: 'GET'
