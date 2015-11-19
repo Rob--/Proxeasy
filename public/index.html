@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Proxeasy</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+</head>
+<body>
+  <style>
+    .header {
+      height: 100%;
+      background-image: linear-gradient(120deg, #155799, #159957);
+    }
+
+    h1 {
+      font-family: Roboto;
+      font-size: 65px;
+      margin: 0;
+      padding-top: 100px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%
+    }
+
+    hr, input, .alert {
+      width: 50% !important
+    }
+  </style>
+
+  <div class="header">
+    <center>
+      <h1>simple & free web proxy</h1>
+      <hr>
+      <div class="form-group">
+        <input id="url" type="text" class="form-control" placeholder="http://www.bbc.co.uk">
+      </div>
+      <hr>
+      <div class="alert alert-info" role="alert" style="display: none">
+        This proxy does not support the https protocol, try http.
+      </div>
+    </center>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <script>
+    $('#url').keyup(function(event){
+      var url = $('#url').val();
+      if(url.startsWith('https')) return $('.alert').fadeIn(250);
+      else $('.alert').fadeOut(250);
+      if(event.keyCode == 13) window.location.pathname = url;
+    });
+  </script>
+</body>
+</html>
