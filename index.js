@@ -21,15 +21,14 @@ app.get("/*", function(req, res){
   var host = url.host
   var path = url.path
   var port = path.indexOf('https') == -1 ? 80 : 443
-  var method = req.headers.method
 
-  console.log(ip, method, '(' + port + ')', host + path, '\n', path)
+  console.log(ip, 'requested (' + port + ')', host + path, '\n', path)
 
   var config = {
     hostname: host,
     port: port,
     path: path,
-    method: method
+    method: 'GET'
   }
 
   var req_cb = function(proxy_res){
