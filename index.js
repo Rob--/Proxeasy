@@ -20,7 +20,7 @@ app.get("/*", function(req, res){
   var url = URL.parse(req.url.substr(1))
   var host = url.host
   var path = url.path
-  var port = path.indexOf('https') == -1 ? 80 : 443
+  var port = 80//path.indexOf('https') == -1 ? 80 : 443
 
   console.log(ip + ' requested (' + port + '):\n > host: ' + host + '\n > path: ' + path + '\n > url obj:', url, '\n---')
 
@@ -37,16 +37,16 @@ app.get("/*", function(req, res){
     })
 
     proxy_res.on('end', function(){
-      res.end();
+      res.end()
     })
   }
 
-  var proxy = config.port == 443 ? https.request(config, req_cb) : http.request(config, req_cb);
+  var proxy = http.request(config, req_cb)//config.port == 443 ? https.request(config, req_cb) : http.request(config, req_cb)
 
   proxy.on('error', function(error) {
     console.log('an error occured', error)
   });
-  
+
   proxy.end();
 })
 
