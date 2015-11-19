@@ -56,7 +56,7 @@
   <script>
     $('#url').keyup(function(event){
       var url = $('#url').val();
-      if(url.startsWith('https')) return $('.alert').fadeIn(250);
+      if(url.toLowerCase().startsWith('https')) return $('.alert').fadeIn(250);
       else $('.alert').fadeOut(250);
       if(event.keyCode == 13) window.location.href = window.location.href.replace('https', 'http') + url;
     });
